@@ -1,0 +1,11 @@
+{% if menu %}
+	<ul>
+	{% for item in items %}
+		<li class="{{ item.classes | join(' ') }}">
+			{# item.xfn is the Link Relationship within Wordpress, it's being used here as a page anchor #}
+			<a target="{{ item.target }}" href="{{ item.link }}{% if item.xfn %}#{{ item.xfn }}{% endif %}">{{ item.title }}</a>
+			{% include "menu.twig" with {'items': item.children} %}
+		</li>
+	{% endfor %}
+	</ul>
+{% endif %}

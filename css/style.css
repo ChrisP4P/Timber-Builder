@@ -1,0 +1,53 @@
+:root{
+    /* Vars */
+    --textcolor: red;
+    --bgcolor: blue;
+}
+
+body {
+    /* Neo-Grotesque from https://modernfontstacks.com */
+    font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.wrapper {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+/* Flexible Layout element global styles */
+
+/* Style buttons across the site */
+.button {
+    color: var(--textcolor);
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+
+
+    background-color: var(--bgcolor);
+    border: 1px solid var(--textcolor);
+
+    padding: 1em 2rem;
+    margin: 1em 0;
+
+
+}
+
+.button:hover {
+    color: var(--bgcolor);
+    background-color: var(--textcolor);
+    /*  */
+}
+
+.button_small {
+    font-size: 0.875em;
+}
+.button_medium {
+    font-size: 1.25em;
+}
+.button_large {
+    font-size: 1.75em;
+}

@@ -1,0 +1,108 @@
+<style scoped>
+    :root {
+        --main-gap: 4rem;
+        --gap: 2rem;
+    }
+    .image-with-lock-in {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--main-gap);
+        margin: var(--main-gap) auto;
+
+        
+    }
+
+    .image-with-lock-in.image_first {
+        flex-direction: row-reverse;
+    }
+
+    @media screen and (max-width: 720px) {
+        .image-with-lock-in {
+            flex-direction: column;
+        }
+        .image-with-lock-in.image_first {
+            flex-direction: column-reverse;
+        }
+    }
+
+    .image-with-lock-in__image {
+        width: 50%;
+    }
+
+    .image-with-lock-in__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--gap);
+        margin: var(--gap) 0;
+
+        width: 50%;
+
+        {% if colours.text_colour %}
+            color: {{ colours.text_colour }};
+        {% endif %}
+    }
+
+    @media screen and (max-width: 720px) {
+        .image-with-lock-in__info,
+        .image-with-lock-in__image {
+            width: 100%;
+        }
+    }
+    .button {
+        {% if colours.text_colour %}
+            color: {{ colours.text_colour }};
+        {% endif %}
+        {% if colours.background_colour %}
+            background-color: {{ colours.background_colour }};
+        {% endif %}
+    }
+
+    /* This will need to be styled */
+    .button:hover {
+        {% if colours.text_colour %}
+            background-color: {{ colours.text_colour }};
+        {% endif %}
+        {% if colours.background_colour %}
+            color: {{ colours.background_colour }};
+        {% endif %}
+    }
+
+    .image-with-lock-in__info.button-uppercase .button {
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="image-with-lock-in {{ layout.reverse_layout }} {% if layout.classes %} {{ layout.classes }} {% endif %} {{ layout.colour }}" {% if layout.section_id %} id="{{ layout.section_id }}" {% endif %}>
+    <div class="image-with-lock-in__info {% for option in layout.lock_in_options %}{{ option }} {% endfor %}">	
+        {% if layout.heading %}<h2 class="image-with-lock-in__heading">{{ layout.heading }}</h2>{% endif %}
+        {% if layout.description %}<div class="image-with-lock-in__description">{{ layout.description }}</div>{% endif %}
+
+        {# Button is just an <a></a> . As most buttons are just links with no form submit functionality 
+        there's no need to use the button element. Have given this a default .button class to allow
+        for global styling. #}
+        {% set button = layout.button %}
+        {% if button.button_text %}<a class="hero__button button {{ button.button_size }}" href="{{ button.button_url }}">{{ button.button_text }}</a>{% endif %}
+    </div>
+    <div class="image-with-lock-in__image">
+        {% if layout.image %}
+            {# This crops a supplied image to a max of 720px wide, coverts to webp, and forces the original image aspect ratio.
+                To force the image into your preferred crop first remove the aspect-ratio style from the wrapper, then specify
+                your image dimensions. eg. resize(600, 600, 'center') will provide a square image cropped from the centre of the 
+                original image. #}
+            <picture class="image-with-lock-in_photo" style="aspect-ratio:{{ get_image(layout.image).aspect }};">
+                <source srcset="{{ get_image(layout.image).src|resize(720)|towebp }}" type="image/webp">
+                <source srcset="{{ get_image(layout.image).src|resize(720)|tojpg }}" type="image/jpeg">
+                <img src="{{ get_image(layout.image).src|resize(720)|tojpg }}" alt="{{ get_image(layout.image).alt }}" loading="lazy">
+            </picture>
+        {% else %}
+            <img src="{{ site.theme.link }}/assets/svg/placeholder.svg" alt="Placeholder image" loading="lazy">
+        {% endif %}
+    </div>
+</section>
+
+
+
+

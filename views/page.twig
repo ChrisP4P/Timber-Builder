@@ -1,0 +1,9 @@
+{% extends "base.twig" %}
+
+{% set page_class = 'timber-builder' %}
+
+{% block content %}
+	{% for layout in post.meta("flex_layouts") %}
+		{% include "flex-layouts/" ~ layout.acf_fc_layout ~ ".twig" %}
+	{% endfor %}
+{% endblock %}

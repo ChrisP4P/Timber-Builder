@@ -1,0 +1,96 @@
+<style scoped>
+    :root {
+        --main-gap: 4rem;
+        --box-gap: 2rem;
+
+        /* Set a relative width for boxes */
+        --box-width: 25vw;
+        /* Set a minimum width to force the wrap, usually choose 280px as it's under 
+        the min mobile screen width and leave a little room */
+        --box-min-width: 280px;
+    }
+
+    .feature-boxes {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--main-gap);
+        margin: var(--main-gap) auto;
+    }
+    
+
+    .feature-boxes__box-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--box-gap);
+        margin: var(--box-gap) 0;
+    }
+
+    .feature-boxes__box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: var(--box-gap);
+        border: 1px solid currentColor;
+
+        width: var(--box-width);
+        min-width: var(--box-min-width);
+        height: 100%;
+    }
+
+    .feature-boxes__description {
+        flex-grow: 1;
+    }
+
+    .feature-boxes__cta {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--main-gap);
+    }
+
+    @media screen and (max-width: 720px) {
+
+    }
+    .button {
+        color: currentColor;
+        text-decoration: none;
+        border: 1px solid currentColor;
+        padding: 1rem 2rem;
+        margin: 1rem 0;
+    }
+
+    /* This will need to be styled */
+    .button:hover {
+
+    }
+</style>
+
+<section class="feature-boxes {% if layout.classes %} {{ layout.classes }} {% endif %} {{ layout.colour }}" {% if layout.section_id %} id="{{ layout.section_id }}" {% endif %}>
+
+    {% if layout.heading %}<h2 class="feature-boxes__heading">{{ layout.heading }}</h2>{% endif %}
+    {% if layout.intro %}<div class="feature-boxes__intro">{{ layout.intro }}</div>{% endif %}
+    <div class="feature-boxes__box-wrapper">
+    {% for box in layout.boxes %}
+        <article class="feature-boxes__box {{ box.colour }}">
+            {% if box.heading %}<h3>{{ box.heading }}</h3>{% endif %}
+            {% if box.description %}<div class="feature-boxes__description" >{{ box.description }}</div>{% endif %}
+            {% if box.button_text %}<a class="feature-boxes__button button" href="{{ box.button_url }}">{{ box.button_text }}</a>{% endif %}
+        </article>
+    {% endfor %}
+    </div>
+
+    <div class="feature-boxes__cta">
+        {% if layout.cta.summary %}<div>{{ layout.cta.summary }}</div>{% endif %}
+        {% if layout.cta.button_text %}<a class="feature-boxes__button button" href="{{ layout.cta.button_url }}">{{ layout.cta.button_text }}</a>{% endif %}
+    </div>
+
+
+</section>

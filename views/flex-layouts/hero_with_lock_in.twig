@@ -1,0 +1,157 @@
+<style scoped>
+    {% set colours = layout.colours %}
+    :root {
+        --main-gap: 4rem;
+        --gap: 2rem;
+    }
+    .hero {
+        margin: 0 auto;
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: relative;
+
+        color: var(--textcolor);
+        background-color: var(--bgcolor);
+
+        {% if colours.background_colour %}
+            background_color: {{ colours.background_colour }};
+        {% endif %}
+    }
+
+    .hero__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: var(--gap);
+        margin: var(--gap) var(--gap);
+        min-width: 280px;
+        width: 25vw;
+
+        position: absolute;
+
+        {% if colours.text_colour %}
+            color: {{ colours.text_colour }};
+        {% endif %}
+    }
+
+    .hero__info.lock-in__top-left {
+        top: var(--gap);
+        left: var(--gap);
+    }
+    .hero__info.lock-in__centre-left {
+        top: 50%;
+        transform: translateY(-50%);
+        left: var(--gap);
+    }
+    .hero__info.lock-in__bottom-left {
+        bottom: var(--gap);
+        left: var(--gap);
+    }
+    .hero__info.lock-in__top-centre {
+        top: var(--gap);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .hero__info.lock-in__centre-centre {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .hero__info.lock-in__bottom-centre {
+        bottom: var(--gap);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .hero__info.lock-in__top-right {
+        top: var(--gap);
+        right: var(--gap);
+    }
+    .hero__info.lock-in__centre-right {
+        top: 50%;
+        transform: translateY(-50%);
+        right: var(--gap);
+    }
+    .hero__info.lock-in__bottom-right {
+        bottom: var(--gap);
+        right: var(--gap);
+    }
+
+    .hero__info.show-border {
+        border: 1px solid currentColor;
+        {% if colours.text_colour %}
+            border: 1px solid {{ colours.text_colour }};
+        {% endif %}
+    }
+
+    .hero__info.show-background {
+        background-color: var(--bgcolor);
+        {% if colours.background_colour %}
+            background-color: {{ colours.background_colour }};
+        {% endif %}
+    }
+
+    .hero__info:not(show-background) {
+        background-color: transparent;
+    }
+
+    @media screen and (max-width: 720px) {
+        .hero__info {
+            width: 100%;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, 0%);
+
+            bottom: unset !important;
+            right: unset !important;
+
+            margin: 0;
+        }
+        .hero {
+            margin-bottom: 100%;
+        }
+    }
+    .hero__info .button {
+        {% if colours.text_colour %}
+            color: {{ colours.text_colour }};
+        {% endif %}
+        {% if colours.background_colour %}
+            background_color: {{ colours.background_colour }};
+        {% endif %}
+    }
+
+    /* This will need to be styled */
+    .hero__info .button:hover {
+        {% if colours.background_colour %}
+            color: {{ colours.background_colour }};
+        {% endif %}
+        {% if colours.text_colour %}
+            background-color: {{ colours.text_colour }};
+        {% endif %}
+    }
+
+    .hero__info.button-uppercase .button {
+        text-transform: uppercase;
+    }
+</style>
+
+<section class="hero {% if layout.classes %} {{ layout.classes }} {% endif %} {{ layout.colour }}" 
+        {% if layout.section_id %} id="{{ layout.section_id }}" {% endif %}
+        style="background-image: url( {{ get_image(layout.image).src|resize(1600,900 ,'center')|tojpg }});
+                aspect-ratio: {{ get_image(layout.image).aspect }}"    
+        >
+    <div class="hero__info {% for option in layout.lock_in_options %}{{ option }} {% endfor %} {{ layout.lock_in_position }}">	
+        {% if layout.heading %}<h2 class="hero__heading">{{ layout.heading }}</h2>{% endif %}
+        {% if layout.description %}<div class="hero__description">{{ layout.description }}</div>{% endif %}
+
+        {# Button is just an <a></a> . As most buttons are just links with no form submit functionality 
+            there's no need to use the button element. Have given this a default .button class to allow
+            for global styling. #}
+        {% set button = layout.button %}
+        {% if button.button_text %}<a class="hero__button button {{ button.button_size }}" href="{{ button.button_url }}">{{ button.button_text }}</a>{% endif %}
+    </div>
+</section>
+
+

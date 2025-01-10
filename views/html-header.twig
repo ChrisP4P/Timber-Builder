@@ -16,37 +16,40 @@
     <link rel="pingback" href="{{ site.pingback_url }}" />
     <link rel="profile" href="http://gmpg.org/xfn/11">
     {{function('wp_head')}}
-    
+    {{ dump() }}
+    {# Style block used for global styles set on the Site Settings Options page. #}
     <style>
-        {% set primary = options.primary %}
-        {% set secondary = options.secondary %}
-        {% set tertiary = options.tertiary %}
-        {% set quaternary = options.quaternary %}
     
         /* Vars */
         .primary {
-            --textcolor: {{ options.primary.text_colour }};
-            --bgcolor: {{ options.primary.bg_colour }};
+            --textcolor: {{ options.colours.primary.text_colour }};
+            --bgcolor: {{ options.colours.primary.bg_colour }};
             color: var(--textcolor);
             background-color: var(--bgcolor);
         }
         .secondary {
-            --textcolor: {{ options.secondary.text_colour }};
-            --bgcolor: {{ options.secondary.bg_colour }};
+            --textcolor: {{ options.colours.secondary.text_colour }};
+            --bgcolor: {{ options.colours.secondary.bg_colour }};
             color: var(--textcolor);
             background-color: var(--bgcolor);
         }
         .tertiary {
-            --textcolor: {{ options.tertiary.text_colour }};
-            --bgcolor: {{ options.tertiary.bg_colour }};
+            --textcolor: {{ options.colours.tertiary.text_colour }};
+            --bgcolor: {{ options.colours.tertiary.bg_colour }};
             color: var(--textcolor);
             background-color: var(--bgcolor);
         }
         .quaternary {
-            --textcolor: {{ options.quaternary.text_colour }};
-            --bgcolor: {{ options.quaternary.bg_colour }};
+            --textcolor: {{ options.colours.quaternary.text_colour }};
+            --bgcolor: {{ options.colours.quaternary.bg_colour }};
             color: var(--textcolor);
             background-color: var(--bgcolor);
+        }
+        
+        .wrapper {
+            width: 100%;
+            max-width: {{ options.max_width }}px;
+            margin: 0 auto;
         }
 
     </style>

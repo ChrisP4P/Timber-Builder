@@ -1,5 +1,4 @@
 <style scoped>
-    {% set colours = layout.colours %}
     :root {
         --main-gap: 4rem;
         --gap: 2rem;
@@ -13,9 +12,6 @@
         color: var(--textcolor);
         background-color: var(--bgcolor);
 
-        {% if colours.background_colour %}
-            background_color: {{ colours.background_colour }};
-        {% endif %}
     }
 
     .hero__info {
@@ -31,9 +27,6 @@
 
         position: absolute;
 
-        {% if colours.text_colour %}
-            color: {{ colours.text_colour }};
-        {% endif %}
     }
 
     .hero__info.lock-in__top-left {
@@ -81,16 +74,10 @@
 
     .hero__info.show-border {
         border: 1px solid currentColor;
-        {% if colours.text_colour %}
-            border: 1px solid {{ colours.text_colour }};
-        {% endif %}
     }
 
     .hero__info.show-background {
         background-color: var(--bgcolor);
-        {% if colours.background_colour %}
-            background-color: {{ colours.background_colour }};
-        {% endif %}
     }
 
     .hero__info:not(show-background) {
@@ -113,25 +100,7 @@
             margin-bottom: 100%;
         }
     }
-    .hero__info .button {
-        {% if colours.text_colour %}
-            color: {{ colours.text_colour }};
-        {% endif %}
-        {% if colours.background_colour %}
-            background_color: {{ colours.background_colour }};
-        {% endif %}
-    }
-
-    /* This will need to be styled */
-    .hero__info .button:hover {
-        {% if colours.background_colour %}
-            color: {{ colours.background_colour }};
-        {% endif %}
-        {% if colours.text_colour %}
-            background-color: {{ colours.text_colour }};
-        {% endif %}
-    }
-
+    
     .hero__info.button-uppercase .button {
         text-transform: uppercase;
     }

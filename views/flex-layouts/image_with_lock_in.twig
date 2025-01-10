@@ -9,8 +9,6 @@
         align-items: center;
         gap: var(--main-gap);
         margin: var(--main-gap) auto;
-
-        
     }
 
     .image-with-lock-in.image_first {
@@ -39,10 +37,6 @@
         margin: var(--gap) 0;
 
         width: 50%;
-
-        {% if colours.text_colour %}
-            color: {{ colours.text_colour }};
-        {% endif %}
     }
 
     @media screen and (max-width: 720px) {
@@ -50,24 +44,6 @@
         .image-with-lock-in__image {
             width: 100%;
         }
-    }
-    .button {
-        {% if colours.text_colour %}
-            color: {{ colours.text_colour }};
-        {% endif %}
-        {% if colours.background_colour %}
-            background-color: {{ colours.background_colour }};
-        {% endif %}
-    }
-
-    /* This will need to be styled */
-    .button:hover {
-        {% if colours.text_colour %}
-            background-color: {{ colours.text_colour }};
-        {% endif %}
-        {% if colours.background_colour %}
-            color: {{ colours.background_colour }};
-        {% endif %}
     }
 
     .image-with-lock-in__info.button-uppercase .button {

@@ -1,5 +1,5 @@
 # A Website Builder
-Uses Timber for templating and liberal use of Advanced Custom Fields' flexible content. Started using this tutorial (https://wptips.dev/flexible-content-in-timber/)[https://wptips.dev/flexible-content-in-timber/]
+Uses Timber for templating and liberal use of Advanced Custom Fields' flexible content. Started using this tutorial https://wptips.dev/flexible-content-in-timber/
 
 ## Prerequisites
 1. Wordpress.

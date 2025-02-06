@@ -135,13 +135,11 @@
 			<tr>
 				<td class="area">{{ table_row.area }}</td>
 				{% if table_row.message %}
-				<td colspan='3' class="message">{{ table_row.message }}</td>
-				{% endif %}
-				{% if table_row.sq_ft %}
-				<td class="sqft">{{ table_row.sq_ft }}</td>
-				{% endif %}
-				{% if table_row.sq_m %}
-				<td class="sqm">{{ table_row.sq_m }}</td>
+					{# The colspan here should be the number of columns being replaced by the message #}
+					<td colspan='2' class="message">{{ table_row.message }}</td>
+				{% else %}
+					<td class="sqft">{{ table_row.sq_ft }}</td>
+					<td class="sqm">{{ table_row.sq_m }}</td>
 				{% endif %}
 			</tr>
 		{% endfor %}

@@ -1,0 +1,131 @@
+<style>
+
+	#{{id}} {
+		width: 100%;
+	}
+	/* Basic zebra stripes */
+	#{{id}} tr:nth-child(even) {
+	  background-color: rgba(255, 255, 255, 0.25);
+	}
+	#{{id}} tr:nth-child(odd) {
+	  background-color: rgba(255, 255, 255, 0.5);
+	}
+	#{{id}} th {
+	  background-color: rgba(0, 0, 0, 0.5);
+	}
+	
+	/* Text vertical alignment */
+	#{{id}} td {
+	  vertical-align: text-top;
+	}
+	#{{id}} th {
+	  vertical-align: bottom;
+	}
+	
+	
+	/* Horizontal alignment */
+	#{{id}} th,
+	#{{id}} td {
+	  text-align: left;
+	  min-width: 8rem;
+	}
+	#{{id}} th:not(:first-of-type),
+	#{{id}} td:not(:first-of-type) {
+	  text-align: right;
+	}
+	
+	/* Hanging indents */
+	#{{id}} th,
+	#{{id}} td {
+	  padding: 0.25em 0.5em 0.25em 1em;
+	  text-indent: -0.5em;
+	}
+	
+	/* Hide cell labels */
+	#{{id}} td::before {
+	  display: none;
+	}
+	
+	/* Width should be discerned by the table itself - find its breakpoint */
+	@media all and (max-width: 37em) {
+		/* Turn table into blocks */
+		#{{id}} table,
+		#{{id}} tr,
+		#{{id}} td {
+			display: block;
+		}
+		
+		/* Give individual rows more space */
+		#{{id}} tr {
+			padding: 0.7em 2vw;
+		}
+		
+		/* Reset right aligned cells */
+		#{{id}} th:not(:first-of-type),
+		#{{id}} td:not(:first-of-type) {
+		  text-align: left;
+		}
+		
+		/* Remove column headers */
+		#{{id}} th,
+		#{{id}} tr:first-of-type {
+			display: none;
+		}
+		
+		/* Style the Caption to act as heading */
+		#{{id}} caption {
+			font-style: normal;
+			font-weight: bold;
+			
+			background-color: rgba(0, 0, 0, 0.35);
+			color: #fff;
+		}
+		
+		/* Labels for cells */
+		#{{id}} td:nth-child(1)::before {
+			content: "Area: ";
+		}
+		#{{id}} td:nth-child(2)::before {
+			content: "Sq ft: ";
+		}
+		#{{id}} td:nth-child(3)::before {
+			content: "Sq m: ";
+		}
+		
+		/* Styles for cell labels */
+		#{{id}} td::before {
+			display: inline;
+			font-weight: bold;
+		}
+		#{{id}} td:nth-of-type(2)::before {
+			font-style: normal;
+		}
+		
+		/* Tidy content */
+		#{{id}} td {
+			display: grid;
+			grid-template-columns: 3em auto;
+			grid-gap: 1em 0.5em;
+		}
+	}
+</style>
+
+<div role="region" aria-labelledby="table-caption" tabindex="0">
+	<table id="{{ id }}" class="responsive-table">
+		<caption id="table-caption">Caption</caption>
+		
+		<tr>
+			<th>Area</th>
+			<th>Sq ft</th>
+			<th>Sq m</th>
+		</tr>
+		{% for table_row in table %}
+			<tr>
+				<td>{{ table_row.area }}</td>
+				<td>{{ table_row.sq_ft }}</td>
+				<td>{{ table_row.sq_m }}</td>
+			</tr>
+		{% endfor %}
+		
+	</table>
+</div>

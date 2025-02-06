@@ -9,6 +9,7 @@ Uses Timber for templating and liberal use of Advanced Custom Fields' flexible c
 Created as an Option page in ACF.
 1. Allows setting base colours for four palettes.
 1. Allows upload of site logo.
+1. Allows setup of global wrapper width.
 
 ## Block types
 1. Accordion

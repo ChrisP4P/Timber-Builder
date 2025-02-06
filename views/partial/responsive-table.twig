@@ -46,6 +46,11 @@
 	  display: none;
 	}
 	
+	/* Centre the column spanning message */
+	#{{id}} tr td.message {
+		text-align: center;
+	}
+	
 	/* Width should be discerned by the table itself - find its breakpoint */
 	@media all and (max-width: 37em) {
 		/* Turn table into blocks */
@@ -82,14 +87,17 @@
 		}
 		
 		/* Labels for cells */
-		#{{id}} td:nth-child(1)::before {
+		#{{id}} td.area::before {
 			content: "Area: ";
 		}
-		#{{id}} td:nth-child(2)::before {
+		#{{id}} td.sqft::before {
 			content: "Sq ft: ";
 		}
-		#{{id}} td:nth-child(3)::before {
+		#{{id}} td.sqm::before {
 			content: "Sq m: ";
+		}
+		#{{id}} td.message::before {
+			content: "";
 		}
 		
 		/* Styles for cell labels */
@@ -107,6 +115,10 @@
 			grid-template-columns: 3em auto;
 			grid-gap: 1em 0.5em;
 		}
+		
+		#{{id}} tr td.message {
+			text-align: left;
+		}
 	}
 </style>
 
@@ -121,9 +133,16 @@
 		</tr>
 		{% for table_row in table %}
 			<tr>
-				<td>{{ table_row.area }}</td>
-				<td>{{ table_row.sq_ft }}</td>
-				<td>{{ table_row.sq_m }}</td>
+				<td class="area">{{ table_row.area }}</td>
+				{% if table_row.message %}
+				<td colspan='3' class="message">{{ table_row.message }}</td>
+				{% endif %}
+				{% if table_row.sq_ft %}
+				<td class="sqft">{{ table_row.sq_ft }}</td>
+				{% endif %}
+				{% if table_row.sq_m %}
+				<td class="sqm">{{ table_row.sq_m }}</td>
+				{% endif %}
 			</tr>
 		{% endfor %}
 		
